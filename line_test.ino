@@ -16,7 +16,7 @@ const unsigned int M2_I_SENSE = A0;
 
 const float M_I_COUNTS_TO_A = (3.3 / 1024.0) / 0.120;
 
-const unsigned int PWM_VALUE = 40;
+const unsigned int PWM_VALUE = 60;
 
 void M1_forward() {
   analogWrite(M1_IN_1, 0);
