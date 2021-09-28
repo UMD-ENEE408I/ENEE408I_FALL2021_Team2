@@ -40,7 +40,7 @@ void setup() {
   motorCharacteristic.setValue(0);
 
   accelerationCharacteristic.setEventHandler(BLEWritten, accelerationCharacteristicWritten);
-  accelerationCharacteritic.setValue(100);
+  accelerationCharacteristic.setValue(100);
 
   BLE.advertise();
   Serial.println("Waiting for connection");
