@@ -39,7 +39,7 @@ void setup() {
   motorCharacteristic.setEventHandler(BLEWritten, motorCharacteristicWritten);
   motorCharacteristic.setValue(0);
 
-  accelerationCharacteristic.setEventHandler(BLEWritten, accelerationCharacteriticWritten);
+  accelerationCharacteristic.setEventHandler(BLEWritten, accelerationCharacteristicWritten);
   accelerationCharacteritic.setValue(100);
 
   BLE.advertise();
