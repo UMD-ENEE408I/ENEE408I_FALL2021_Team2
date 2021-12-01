@@ -21,6 +21,7 @@ float gz_offset = 0;
 float gz_offset_s = 0;
 long gz_time = 0;
 float gz_deg = 0;   //degrees in the z direction
+float gz_deg_adjusted = 0;
 float gz_vel_old = 0;   //set initial gz value to 0 until it's set in the loop
 
 void setup() {
@@ -92,7 +93,7 @@ void setup() {
 
 void loop() 
 {
- 
+
   if (IMU.accelerationAvailable()) {
     IMU.readAcceleration(ax, ay, az);
   }
@@ -120,7 +121,10 @@ void loop()
   {
     avg_gz_vel = ((gz - gz_offset) + gz_vel_old)/2;  //averaging the current gz velocity minus
     gz_deg = gz_deg + ((avg_gz_vel * deltaTimeS)); //integrating the average ang vel 
+    gz_deg_adjusted = gz_deg * 90 / 80;
     Serial.print(gz_deg);
+    Serial.print('\t');
+    Serial.print(gz_deg_adjusted);
     Serial.println();
   }
 
@@ -128,6 +132,5 @@ void loop()
   gz_vel_old = gz;
  // Serial.print(gz_time);Serial.print("\t");
  // Serial.println(); 
-  
- delay(8.4);
+
 }
