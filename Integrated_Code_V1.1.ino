@@ -334,7 +334,9 @@ void loop()
       bin_buf[i] = 0;
     }
   }
-
+  for(int i = 0; i < 13; i++){
+    Serial.println(adc_buf[i]);
+  }
 //Added starting here
 //Junction Key: 1 = right turn, 2 = right turn junction |- , 3 = left turn, 4 = left turn junction -| , 5 = T junction, 6 = + junction, 7 - dead end
   if(left_sensor_count > 3){
