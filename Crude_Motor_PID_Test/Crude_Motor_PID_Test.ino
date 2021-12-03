@@ -1,4 +1,6 @@
+#include <Adafruit_MCP3008.h>
 #include <Encoder.h>
+
 
 //  pins assigned to the encoder values
 const unsigned int M1_ENC_A = 6;
