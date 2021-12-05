@@ -40,7 +40,7 @@ float position_setpoint = 0;  //set the initial position setpoint to zero
 float last_position_setpoint = 0;
 
 /* global variables to keep the old readings */
-float last_time_s = 0;
+float motor_last_time_s = 0;
 float last_error = 0;
 
 /* PID Controller Gains and Global Variables - tuning works well for the 10 cm/s to 80 cm/s range, which is what we'll primarily be operating in  */
@@ -87,7 +87,7 @@ void Motor_Controller(float vel_setpoint, int motor_type)
     
     
       /* Calculating the change in time */
-      float delta_time_s = current_time_s - last_time_s;
+      float delta_time_s = current_time_s - motor_last_time_s;
     
       
       /*  Testing the motor controller with the motor 1 (left motor: tired note - left motor is on right side when the robot is upside down)  */
@@ -115,7 +115,7 @@ void Motor_Controller(float vel_setpoint, int motor_type)
       float new_position_setpoint = position_setpoint + position_increment;
       position_setpoint = new_position_setpoint;
     
-      last_time_s = current_time_s;
+      motor_last_time_s = current_time_s;
       /* Serial Monitor */
       Serial.print(position_setpoint); Serial.print("\t");  //printing out position setpoint to ensure that it's incrementing
       Serial.print(position_cm); Serial.print("\t");
@@ -144,7 +144,7 @@ void Motor_Controller(float vel_setpoint, int motor_type)
     
     
       /* Calculating the change in time */
-      float delta_time_s = current_time_s - last_time_s;
+      float delta_time_s = current_time_s - motor_last_time_s;
     
       
       /*  Testing the motor controller with the motor 1 (left motor: tired note - left motor is on right side when the robot is upside down)  */
@@ -172,7 +172,7 @@ void Motor_Controller(float vel_setpoint, int motor_type)
       float new_position_setpoint = position_setpoint + position_increment;
       position_setpoint = new_position_setpoint;
     
-      last_time_s = current_time_s;
+      motor_last_time_s = current_time_s;
       /* Serial Monitor */
       Serial.print(position_setpoint); Serial.print("\t");  //printing out position setpoint to ensure that it's incrementing
       Serial.print(position_cm); Serial.print("\t");
