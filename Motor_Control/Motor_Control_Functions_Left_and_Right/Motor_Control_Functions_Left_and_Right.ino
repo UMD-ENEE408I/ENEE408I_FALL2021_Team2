@@ -40,7 +40,7 @@ float right_position_setpoint = 0;  //set the right initial position setpoint to
 float last_position_setpoint = 0;
 
 /* global variables to keep the old readings */
-float last_time_s = 0;
+float motor_last_time_s = 0;
 float left_last_error = 0;
 float right_last_error = 0;
 
@@ -72,6 +72,20 @@ void Motor_Controller(float vel_setpoint_left, float vel_setpoint_right)
   float left_beginning_encoder_value = enc1.read(); //this will be at the start of the function
   float right_beginning_encoder_value = enc2.read(); //this will be at the start of the function
   
+  /*  Resetting all global variables for if this isn't made into a header file  */
+  motor_last_time_s = 0;
+  left_P = 0;
+  left_I = 0;
+  left_D = 0;
+  left_last_error = 0;
+  left_position_setpoint = 0;
+
+  right_P = 0;
+  right_I = 0;
+  right_D = 0;
+  right_last_error = 0;
+  right_position_setpoint = 0;
+  
   while(1)
   {
     //Current time and encoder readings
@@ -90,7 +104,7 @@ void Motor_Controller(float vel_setpoint_left, float vel_setpoint_right)
   
   
     /* Calculating the change in time */
-    float delta_time_s = current_time_s - last_time_s;
+    float delta_time_s = current_time_s - motor_last_time_s;
   
     
     /*  Testing the motor controller with the motor 1 (left motor: tired note - left motor is on right side when the robot is upside down)  */
@@ -137,7 +151,7 @@ void Motor_Controller(float vel_setpoint_left, float vel_setpoint_right)
     left_position_setpoint = left_new_position_setpoint;
     right_position_setpoint = right_new_position_setpoint;
   
-    last_time_s = current_time_s;
+    motor_last_time_s = current_time_s;
     Serial.print(left_position_setpoint); Serial.print("\t");  //printing out position setpoint to ensure that it's incrementing
     Serial.print(left_position_cm); Serial.print("\t");
     Serial.print(left_error_sig); Serial.print("\t");
